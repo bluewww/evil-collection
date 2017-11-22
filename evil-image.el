@@ -45,8 +45,8 @@
     "^" 'image-bol
     "$" 'image-eol
     (kbd "C-d") 'image-scroll-down
-    (kbd "SPC") 'image-scroll-up
-    (kbd "S-SPC") 'image-scroll-down
+    ;(kbd "SPC") 'image-scroll-up
+    ;(kbd "S-SPC") 'image-scroll-down
     (kbd "DEL") 'image-scroll-down
 
     ;; animation
