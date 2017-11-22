@@ -8,7 +8,7 @@
 ;; URL: https://github.com/jojojames/evil-collection
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "25.1"))
-;; Keywords: evil, tide, typescript
+;; Keywords: evil, tide, typescript, languages
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,10 +27,11 @@
 ;;; Bindings for `tide-mode'.
 
 ;;; Code:
-(require 'tide)
+(require 'tide nil t)
 (require 'evil)
 
 (defun evil-tide-setup ()
+  "Set up `evil' bindings for `tide'."
   (evil-define-key 'normal tide-mode-map
     (kbd "gd") #'tide-jump-to-definition
     (kbd "C-t") #'tide-jump-back

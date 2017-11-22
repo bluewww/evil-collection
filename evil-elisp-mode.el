@@ -8,7 +8,7 @@
 ;; URL: https://github.com/jojojames/evil-collection
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "25.1"))
-;; Keywords: evil, elisp
+;; Keywords: evil, elisp, lisp
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
 (require 'elisp-mode)
 (require 'evil)
 
-(defun evil-collection-last-sexp-setup-props (beg end value alt1 alt2)
+(defun evil-elisp-mode-last-sexp-setup-props (beg end value alt1 alt2)
   "Set up text properties for the output of `elisp--eval-last-sexp'.
 BEG and END are the start and end of the output in current-buffer.
 VALUE is the Lisp value printed, ALT1 and ALT2 are strings for the
@@ -50,8 +50,9 @@ alternative printed representations that can be displayed."
                      rear-nonsticky (mouse-face keymap help-echo
                                                 printed-value)))))
 (defun evil-elisp-mode-setup ()
+  "Set up `evil' bindings for `elisp-mode'."
   (advice-add 'last-sexp-setup-props
-              :override #'evil-collection-last-sexp-setup-props))
+              :override #'evil-elisp-mode-last-sexp-setup-props))
 
 (provide 'evil-elisp-mode)
 ;;; evil-elisp-mode.el ends here

@@ -28,10 +28,14 @@
 
 ;;; Code:
 (require 'evil-collection-util)
-(require 'slime)
+(require 'slime nil t)
+
+(defvar sldb-mode-map)
+(defvar slime-inspector-mode-map)
 
 (defun evil-slime-setup ()
-  (+evilify-map
+  "Set up `evil' bindings for `slime'."
+  (evil-collection-util-evilify-map
    sldb-mode-map
    :mode sldb-mode
    :bindings
@@ -43,7 +47,7 @@
    "gb" 'sldb-break-on-return
    "gB" 'sldb-break-with-default-debugger)
 
-  (+evilify-map
+  (evil-collection-util-evilify-map
    slime-inspector-mode-map
    :mode slime-inspector-mode
    :bindings

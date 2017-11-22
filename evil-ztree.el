@@ -27,9 +27,10 @@
 
 ;;; Code:
 (require 'evil)
-(require 'ztree)
+(require 'ztree nil t)
 
 (defun evil-ztree-setup ()
+  "Set up `evil' bindings for `ztree'."
   (evil-set-initial-state 'ztree-mode 'motion)
 
   (evil-define-key 'motion ztree-mode-map

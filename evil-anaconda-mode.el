@@ -7,7 +7,7 @@
 ;; URL: https://github.com/jojojames/evil-collection
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "25.1"))
-;; Keywords:
+;; Keywords: evil, python, tools
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -26,10 +26,11 @@
 ;;; Bindings for `anaconda-mode'.
 
 ;;; Code:
-(require 'anaconda-mode)
+(require 'anaconda-mode nil t)
 (require 'evil)
 
 (defun evil-anaconda-mode-setup ()
+  "Set up `evil' bindings for `anaconda-mode'."
   ;; Bindings don't seem to be set the first time.
   (add-hook 'anaconda-mode-hook #'evil-normalize-keymaps)
 

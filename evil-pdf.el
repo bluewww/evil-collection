@@ -28,7 +28,7 @@
 
 ;;; Code:
 (require 'evil)
-(require 'pdf-view)
+(require 'pdf-view nil t)
 
 ;; TODO: `image-mode-map' is the parent of `pdf-view-mode-map'.  A bug(?) in
 ;; image-mode-map and pdf-mode-map seem to conflict with Evil.
@@ -36,19 +36,23 @@
 ;; and https://github.com/politza/pdf-tools/issues/324.
 ;; Changing load order only changes which mode overrides the other.
 
-(defun evil-pdf-view-goto-page (&optional page)
-  (interactive "P")
-  (if page
-      (pdf-view-goto-page page)
-    (pdf-view-last-page)))
+(with-no-warnings
+  (defun evil-pdf-view-goto-page (&optional page)
+    "`evil' wrapper around `pdf-view-last-page'."
+    (interactive "P")
+    (if page
+        (pdf-view-goto-page page)
+      (pdf-view-last-page)))
 
-(defun evil-pdf-view-goto-first-page (&optional page)
-  (interactive "P")
-  (if page
-      (pdf-view-goto-page page)
-    (pdf-view-first-page)))
+  (defun evil-pdf-view-goto-first-page (&optional page)
+    "`evil' wrapper around `pdf-view-first-page'."
+    (interactive "P")
+    (if page
+        (pdf-view-goto-page page)
+      (pdf-view-first-page))))
 
 (defun evil-pdf-setup ()
+  "Set up `evil' bindings for `pdf-view'."
   (evil-set-initial-state 'pdf-view-mode 'motion)
   (evil-define-key 'motion pdf-view-mode-map
     ;; motion
@@ -105,7 +109,7 @@
     (kbd "<down-mouse-1>")  'pdf-view-mouse-set-region
 
     (kbd "C-c C-c") 'docview-mode
-    (kbd "C-c <tab>") 'pdf-view-extract-region-image
+    [?\C-c tab] 'pdf-view-extract-region-image ; workaround package-lint bug
 
     "sb" 'pdf-view-set-slice-from-bounding-box
     "sm" 'pdf-view-set-slice-using-mouse

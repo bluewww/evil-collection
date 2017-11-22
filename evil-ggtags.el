@@ -28,14 +28,20 @@
 
 ;;; Code:
 (require 'evil-collection-util)
-(require 'ggtags)
+(require 'ggtags nil t)
+
+(defvar ggtags-global-mode-map)
+(defvar ggtags-view-search-history-mode-map)
+(defvar ggtags-view-tag-history-mode-map)
+(defvar ggtags-navigation-map)
 
 (defun evil-ggtags-setup ()
-  (+evilify-map
+  "Set up `evil' bindings for `ggtags'."
+  (evil-collection-util-evilify-map
    ggtags-global-mode-map
    :mode ggtags-global-mode)
 
-  (+evilify-map
+  (evil-collection-util-evilify-map
    ggtags-view-search-history-mode-map
    :bindings
    "j" 'ggtags-view-search-history-prev
@@ -48,7 +54,7 @@
    "e" 'evil-forward-word-end
    "E" 'evil-forward-WORD-end)
 
-  (+evilify-map
+  (evil-collection-util-evilify-map
    ggtags-view-tag-history-mode-map
    :bindings
    "\C-j" 'next-error-no-select
@@ -56,7 +62,7 @@
    "e" 'evil-forward-word-end
    "E" 'evil-forward-WORD-end)
 
-  (+evilify-map
+  (evil-collection-util-evilify-map
    ggtags-view-tag-history-mode-map
    :bindings
    "\C-j" 'next-error-no-select
@@ -64,7 +70,7 @@
    "e" 'evil-forward-word-end
    "E" 'evil-forward-WORD-end)
 
-  (+evilify-map
+  (evil-collection-util-evilify-map
    ggtags-navigation-map
    :bindings
    "\C-j" 'next-error

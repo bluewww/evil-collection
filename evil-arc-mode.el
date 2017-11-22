@@ -1,4 +1,4 @@
-;;; evil-arc.el --- Evil bindings for arc-mode. -*- lexical-binding: t -*-
+;;; evil-arc-mode.el --- Evil bindings for arc-mode. -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2017 James Nguyen
 
@@ -8,7 +8,7 @@
 ;; URL: https://github.com/jojojames/evil-collection
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "25.1"))
-;; Keywords: evil, arc-mode, archive, bindings
+;; Keywords: evil, arc-mode, archive, bindings, files
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@
 (require 'evil)
 
 (defun evil-arc-mode-setup ()
+  "Set up `evil' bindings for `arc-mode'."
   (evil-set-initial-state 'arc-mode 'motion)
   (evil-set-initial-state 'archive-mode 'motion)
   (evil-define-key 'motion archive-mode-map
@@ -59,4 +60,4 @@
     (kbd "C") 'archive-chown-entry))
 
 (provide 'evil-arc-mode)
-;;; evil-arc.el ends here
+;;; evil-arc-mode.el ends here

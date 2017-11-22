@@ -8,7 +8,7 @@
 ;; URL: https://github.com/jojojames/evil-collection
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "25.1"))
-;; Keywords: evil, bindings
+;; Keywords: evil, bindings, files, pdf, ps, dvi
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@
 (require 'doc-view)
 
 (defun evil-doc-view-setup ()
+  "Set up `evil' bindings for `doc-view'."
   (evil-set-initial-state 'doc-view-mode 'motion)
   (evil-define-key 'motion doc-view-mode-map
     (kbd "C-j") 'doc-view-next-page

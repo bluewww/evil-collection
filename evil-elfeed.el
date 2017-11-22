@@ -27,10 +27,11 @@
 ;; Evil bindings for elfeed.
 
 ;;; Code:
-(require 'elfeed)
+(require 'elfeed nil t)
 (require 'evil)
 
 (defun evil-elfeed-setup ()
+  "Set up `evil' bindings for `elfeed'."
   (evil-set-initial-state 'elfeed-search-mode 'motion)
 
   (evil-define-key 'motion elfeed-search-mode-map

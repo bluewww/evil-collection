@@ -28,9 +28,10 @@
 
 ;;; Code:
 (require 'evil)
-(require 'image+)
+(require 'image+ nil t)
 
 (defun evil-image+-setup ()
+  "Set up `evil' bindings for `image+'."
   (evil-define-key 'motion image-mode-map
     "+" 'imagex-sticky-zoom-in
     "-" 'imagex-sticky-zoom-out

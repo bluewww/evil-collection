@@ -27,10 +27,11 @@
 ;; Evil bindings for debbugs.
 
 ;;; Code:
-(require 'debbugs)
+(require 'debbugs nil t)
 (require 'evil)
 
-(defun evil-diff-mode-setup ()
+(defun evil-debbugs-mode-setup ()
+  "Set up `evil' bindings for `debbugs-gnu-mode'."
   (evil-set-initial-state 'debbugs-gnu-mode 'motion)
 
   (evil-define-key 'motion debbugs-gnu-mode-map

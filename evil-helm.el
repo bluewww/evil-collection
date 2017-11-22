@@ -28,7 +28,7 @@
 
 ;;; Code:
 (require 'evil)
-(require 'helm-files) ; TODO: Check if this is the ideal requirement and if we are not loading too much.
+(require 'helm-files nil t) ; TODO: Check if this is the ideal requirement and if we are not loading too much.
 
 ;; To navigate Helm entries with <hjkl> in insert state, we need a modifier.
 ;; Using the C- modifier would conflict with the help prefix "C-h".  So we use
@@ -38,7 +38,12 @@
 ;; down the file system hierarchy since we need them to use it to edit the
 ;; minibuffer content.
 
+(defvar helm-map)
+(defvar helm-find-files-map)
+(defvar helm-read-file-map)
+
 (defun evil-helm-setup ()
+  "Set up `evil' bindings for `helm'."
   ;; TODO: We should not modify helm-map in Emacs state but somehow it does not
   ;; work otherwise.
   (define-key helm-map (kbd "M-[") 'helm-previous-source)

@@ -28,10 +28,13 @@
 
 ;;; Code:
 (require 'evil-collection-util)
-(require 'flycheck)
+(require 'flycheck nil t)
+
+(defvar flycheck-error-list-mode-map)
 
 (defun evil-flycheck-setup ()
-  (+evilify-map
+  "Set up `evil' bindings for `flycheck'."
+  (evil-collection-util-evilify-map
    flycheck-error-list-mode-map
    :mode flycheck-error-list-mode
    :bindings

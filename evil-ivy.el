@@ -28,9 +28,10 @@
 
 ;;; Code:
 (require 'evil)
-(require 'ivy)
+(require 'ivy nil t)
 
 (defun evil-ivy-setup ()
+  "Set up `evil' bindings for `ivy-mode'."
   (evil-define-key 'normal ivy-occur-mode-map
     [mouse-1] 'ivy-occur-click
     (kbd "RET") 'ivy-occur-press-and-switch

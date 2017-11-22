@@ -29,9 +29,10 @@
 
 ;;; Code:
 (require 'evil-collection-util)
-(require 'elisp-refs)
+(require 'elisp-refs nil t)
 
 (defun evil-elisp-refs-setup ()
+  "Set up `evil' bindings for `elisp-refs'."
   (evil-define-key 'normal elisp-refs-mode-map
     (kbd "<tab>") #'elisp-refs-next-match
     (kbd "<backtab>") #'elisp-refs-prev-match

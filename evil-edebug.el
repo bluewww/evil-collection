@@ -30,9 +30,10 @@
 (require 'edebug)
 (require 'evil-collection-util)
 
-(defun evil-edebug-setup ()
-  (+evil-set-default-state-for-mode edebug-mode motion)
+(evil-collection-util-set-initial-state edebug-mode motion)
 
+(defun evil-edebug-setup ()
+  "Set up `evil' bindings for `edebug'."
   (evil-define-key 'motion 'edebug-mode-map
     ;; control
     " " nil

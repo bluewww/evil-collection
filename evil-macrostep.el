@@ -28,9 +28,10 @@
 
 ;;; Code:
 (require 'evil-collection-util)
-(require 'macrostep)
+(require 'macrostep nil t)
 
 (defun evil-macrostep-setup ()
+  "Set up `evil' bindings for `macrostep'."
   ;; Keymaps don't seem to be populated on first try.
   ;; Force `evil' to normalize keymaps.
   (add-hook 'macrostep-mode-hook #'evil-normalize-keymaps)

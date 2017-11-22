@@ -31,7 +31,8 @@
 (require 'ibuffer)
 
 (defun evil-ibuffer-setup ()
-  (+evilify-map
+  "Set up `evil' bindings for `ibuffer'."
+  (evil-collection-util-evilify-map
    ibuffer-mode-map
    :mode ibuffer-mode
    :bindings

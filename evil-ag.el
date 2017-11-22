@@ -27,10 +27,11 @@
 ;; Evil bindings for `ag-mode' from the `wgrep-ag' package.
 
 ;;; Code:
-(require 'ag)
+(require 'ag nil t)
 (require 'evil)
 
 (defun evil-ag-setup ()
+  "Set up `evil' bindings for `ag'."
   (evil-add-hjkl-bindings ag-mode-map 'normal
     "gg" #'evil-goto-first-line
     "gr" #'recompile

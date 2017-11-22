@@ -28,11 +28,14 @@
 
 ;;; Code:
 (require 'evil-collection-util)
-(require 'vlf)
+(require 'vlf nil t)
+
+(defvar vlf-mode-map)
 
 ;;; Code:
 (defun evil-vlf-setup ()
-  (+evilify-map
+  "Set up `evil' bindings for `vlf'."
+  (evil-collection-util-evilify-map
    vlf-mode-map
    :mode vlf-mode
    :bindings

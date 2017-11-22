@@ -28,10 +28,13 @@
 
 ;;; Code:
 (require 'evil-collection-util)
-(require 'p4)
+(require 'p4 nil t)
+
+(defvar p4-basic-mode-map)
 
 (defun evil-p4-setup ()
-  (+evilify-map
+  "Set up `evil' bindings for `p4'."
+  (evil-collection-util-evilify-map
    p4-basic-mode-map
    :mode p4-basic-mode
    :bindings

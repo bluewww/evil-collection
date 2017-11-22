@@ -28,10 +28,13 @@
 
 ;;; Code:
 (require 'evil-collection-util)
-(require 'pass)
+(require 'pass nil t)
+
+(defvar pass-mode-map)
 
 (defun evil-pass-setup ()
-  (+evilify-map
+  "Set up `evil' bindings for `pass-mode'."
+  (evil-collection-util-evilify-map
    pass-mode-map
    :mode pass-mode
    :bindings
