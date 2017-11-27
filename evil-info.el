@@ -46,6 +46,8 @@
     "f" 'evil-find-char
     "n" 'evil-search-next
     "?" 'evil-search-backward
+    (kbd "M-SPC") 'Info-scroll-up
+    (kbd "SPC") nil
     (kbd "<tab>") 'Info-next-reference
     (kbd "S-<tab>") 'Info-prev-reference
 
