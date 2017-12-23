@@ -33,6 +33,8 @@
 (defun evil-dired-setup ()
   "Set up `evil' bindings for `dired'."
   (evil-define-key 'normal dired-mode-map
+    (kbd "SPC") nil
+    (kbd "M-SPC") 'dired-next-line
     "j" 'evil-next-line
     "k" 'evil-previous-line
     "l" 'evil-forward-char

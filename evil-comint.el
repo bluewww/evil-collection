@@ -46,7 +46,8 @@
 
   (evil-define-key 'insert comint-mode-map
     (kbd "<up>") #'comint-previous-input
-    (kbd "<down>") #'comint-next-input))
+    (kbd "<down>") #'comint-next-input
+    (kbd "<backtab>") #'comint-dynamic-complete-filename))
 
 (provide 'evil-comint)
 ;;; evil-comint.el ends here
