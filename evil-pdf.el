@@ -53,13 +53,18 @@
 
 (defun evil-pdf-setup ()
   "Set up `evil' bindings for `pdf-view'."
+  (when evil-want-C-u-scroll
+    (evil-define-key 'motion pdf-view-mode-map
+      (kbd "C-u") 'pdf-view-scroll-down-or-previous-page))
+
   (evil-set-initial-state 'pdf-view-mode 'motion)
   (evil-define-key 'motion pdf-view-mode-map
+    (kbd "C-d") 'pdf-view-scroll-up-or-next-page
     ;; motion
     (kbd "<return>") 'image-next-line
     "j" 'pdf-view-next-line-or-next-page
     "k" 'pdf-view-previous-line-or-previous-page
-    (kbd "SPC") 'pdf-view-scroll-up-or-next-page
+    (kbd "M-SPC") 'pdf-view-scroll-up-or-next-page
     (kbd "S-SPC") 'pdf-view-scroll-down-or-previous-page
     (kbd "<delete>") 'pdf-view-scroll-down-or-previous-page
     (kbd "C-f") 'pdf-view-scroll-up-or-next-page
