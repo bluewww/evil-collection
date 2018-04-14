@@ -1,4 +1,4 @@
-;;; evil-collection-util.el --- Base Evil Utilities -*- lexical-binding: t -*-
+;;; evil-collection-util.el --- Utilities for `evil-collection'. -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2017 James Nguyen
 
@@ -8,7 +8,7 @@
 ;; URL: https://github.com/jojojames/evil-collection
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "25.1"))
-;; Keywords: evil, tools
+;; Keywords: evil, emacs, tools
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -24,46 +24,39 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; This package provides a set of utility functions to integrate with
-;; `evil-mode'.
+;;; Bindings for
 
 ;;; Code:
 (require 'evil)
-(require 'evil-evilified-state)
 
-(defmacro evil-collection-util-set-initial-state (mode state)
-  "Set the default STATE for MODE."
-  (let* ((mode-str (symbol-name mode))
-         (state-str (symbol-name state))
-         (defun-name (intern (format "evil-integration-%s-set-%s-default"
-                                     mode-str
-                                     state-str))))
-    `(progn
-       (defun ,defun-name (&rest _)
-         ,(format "Default `evil-state' of `%s' to '%s." mode-str state-str)
-         (if ,mode
-             (,(intern (format "evil-%s-state" state)))
-           (evil-normal-state)))
-       (advice-add #',mode :after #',defun-name))))
-
-(defmacro evil-collection-util-evilify-map (map &rest props)
-  "`evil-evilified-state-evilify-map' with additional bindings.
-This assumes the :bindings key is at the end."
-  (let ((contains-bindings (plist-get props :bindings)))
-    `(evil-evilified-state-evilify-map
-       ,map
-       ,@props
-       ,@(unless contains-bindings
-           '(:bindings))
-       "#" 'evil-search-word-backward
-       "*" 'evil-search-forward
-       "$" 'evil-end-of-line
-       "^" 'evil-first-non-blank
-       "0" 'evil-digit-argument-or-evil-beginning-of-line
-       "b" 'evil-backward-word-begin
-       "B" 'evil-backward-WORD-begin
-       "w" 'evil-forward-word-begin
-       "W" 'evil-forward-WORD-begin)))
+(defmacro evil-collection-util-inhibit-insert-state (map)
+  "Unmap insertion keys from normal state.
+This is particularly useful for read-only modes."
+  `(evil-define-key
+     'normal ,map
+     [remap evil-append] #'ignore
+     [remap evil-append-line] #'ignore
+     [remap evil-insert] #'ignore
+     [remap evil-insert-line] #'ignore
+     [remap evil-change] #'ignore
+     [remap evil-change-line] #'ignore
+     [remap evil-substitute] #'ignore
+     [remap evil-change-whole-line] #'ignore
+     [remap evil-delete] #'ignore
+     [remap evil-delete-line] #'ignore
+     [remap evil-delete-char] #'ignore
+     [remap evil-delete-backward-char] #'ignore
+     [remap evil-replace] #'ignore
+     [remap evil-replace-state] #'ignore
+     [remap evil-open-below] #'ignore
+     [remap evil-open-above] #'ignore
+     [remap evil-paste-after] #'ignore
+     [remap evil-paste-before] #'ignore
+     [remap evil-join] #'ignore
+     [remap evil-indent] #'ignore
+     [remap evil-shift-left] #'ignore
+     [remap evil-shift-right] #'ignore
+     [remap evil-invert-char] #'ignore))
 
 (provide 'evil-collection-util)
 ;;; evil-collection-util.el ends here
