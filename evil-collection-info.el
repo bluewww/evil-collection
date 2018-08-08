@@ -52,6 +52,7 @@
     (kbd "DEL") 'Info-scroll-down
     ;; Add "C-i" for consistency.
     (kbd "C-i") 'Info-history-forward
+    (kbd "M-SPC") 'Info-scroll-up
 
     "d" 'Info-directory
     "u" 'Info-up
