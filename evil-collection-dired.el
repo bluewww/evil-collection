@@ -28,13 +28,13 @@
 
 ;;; Code:
 (require 'dired)
-(require 'evil)
+(require 'evil-collection)
 
 (defconst evil-collection-dired-maps '(dired-mode-map))
 
 (defun evil-collection-dired-setup ()
   "Set up `evil' bindings for `dired'."
-  (evil-define-key 'normal dired-mode-map
+  (evil-collection-define-key 'normal 'dired-mode-map
     (kbd "SPC") nil
     (kbd "M-SPC") 'dired-next-line
     "q" 'quit-window
@@ -99,6 +99,9 @@
     "*/" 'dired-mark-directories
     "*@" 'dired-mark-symlinks
     "*%" 'dired-mark-files-regexp
+    "*(" 'dired-mark-sexp
+    "*." 'dired-mark-extension
+    "*O" 'dired-mark-omitted
     "*c" 'dired-change-marks
     "*s" 'dired-mark-subdir-files
     "*m" 'dired-mark

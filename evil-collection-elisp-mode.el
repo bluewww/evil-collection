@@ -28,7 +28,7 @@
 
 ;;; Code:
 (require 'elisp-mode)
-(require 'evil)
+(require 'evil-collection)
 
 (defconst evil-collection-elisp-mode-maps nil)
 
@@ -38,8 +38,7 @@ BEG and END are the start and end of the output in current-buffer.
 VALUE is the Lisp value printed, ALT1 and ALT2 are strings for the
 alternative printed representations that can be displayed."
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-m")
-      'evil-collection-elisp-mode-return-or-last-sexp-toggle-display)
+    (define-key map (kbd "C-m") 'evil-collection-elisp-mode-return-or-last-sexp-toggle-display)
     (define-key map [down-mouse-2] 'mouse-set-point)
     (define-key map [mouse-2] 'elisp-last-sexp-toggle-display)
     (add-text-properties

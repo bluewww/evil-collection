@@ -28,6 +28,7 @@
 
 ;;; Code:
 (require 'p4 nil t)
+(require 'evil-collection)
 
 (defvar p4-basic-mode-map)
 
@@ -37,7 +38,7 @@
   "Set up `evil' bindings for `p4'."
   (evil-set-initial-state 'p4-basic-mode 'normal)
 
-  (evil-define-key 'normal p4-basic-mode-map
+  (evil-collection-define-key 'normal 'p4-basic-mode-map
     [mouse-1] 'p4-buffer-mouse-clicked
     "k" 'p4-scroll-down-1-line
     "j" 'p4-scroll-up-1-line
@@ -52,6 +53,5 @@
     "G" 'p4-bottom-of-buffer
     "=" 'delete-other-windows))
 
-;;; Code:
 (provide 'evil-collection-p4)
 ;;; evil-collection-p4.el ends here

@@ -7,8 +7,7 @@ This is a collection of [[https://github.com/emacs-evil/evil][Evil]] bindings fo
 not cover properly by default, such as ~help-mode~, ~M-x calendar~, Eshell and
 more.
 
-*Warning:* This project is still in an early development phase, expect
-some default bindings to change in the future.
+*Warning:* Expect some default bindings to change in the future.
 
 ** Goals
 
@@ -35,11 +34,17 @@ some default bindings to change in the future.
 
    : (add-to-list 'load-path (expand-file-name "/path/to/evil-collection/" user-emacs-directory))
 
-   - Register the bindings, either all at once with ~evil-collection-init~:
+   - Register the bindings, either all at once with
+
+   : (evil-collection-init)
 
    or mode-by-mode, for instance:
 
    : (with-eval-after-load 'calendar (require 'evil-collection-calendar) (evil-collection-calendar-setup))
+
+   or by providing an argument to ~evil-collection-init~:
+
+   : (evil-collection-init 'calendar)
 
    The list of supported modes is configured by ~~evil-collection-mode-list~~.
 
@@ -88,6 +93,7 @@ some default bindings to change in the future.
 
    For example, if you want to enable Evil in the minibuffer, you'll have to turn it on
    explicitly by customizing ~evil-collection-setup-minibuffer~ to ~t~.
+   Some minibuffer-related packages such as Helm rely on this option.
 
    ~use-package~ example:
 
@@ -518,9 +524,7 @@ some default bindings to change in the future.
 
    Third-party packages are provided by several parties:
 
-   - [[https://github.com/emacs-evil/evil-ediff][evil-ediff]]
    - [[https://github.com/emacs-evil/evil-magit][evil-magit]]
-   - [[https://github.com/JorisE/evil-mu4e][evil-mu4e]]
    - Lispy: [[https://github.com/noctuid/lispyville][lispyville]] or [[https://github.com/sp3ctum/evil-lispy][evil-lispy]]
    - Org-mode: https://github.com/GuiltyDolphin/org-evil or https://github.com/Somelauw/evil-org-mode
 

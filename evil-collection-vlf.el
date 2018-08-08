@@ -27,7 +27,7 @@
 ;; Evil bindings for `vlf'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'vlf nil t)
 
 (defvar vlf-mode-map)
@@ -45,7 +45,7 @@
   "Set up `evil' bindings for `vlf'."
   (evil-set-initial-state 'vlf-mode 'normal)
 
-  (evil-define-key 'normal vlf-mode-map
+  (evil-collection-define-key 'normal 'vlf-mode-map
     "gj" 'vlf-next-batch
     "gk" 'vlf-prev-batch
     (kbd "C-j") 'vlf-next-batch

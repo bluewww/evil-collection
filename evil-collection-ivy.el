@@ -27,7 +27,7 @@
 ;; Evil bindings for `ivy-mode'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'ivy nil t)
 
 (defconst evil-collection-ivy-maps '(ivy-occur-mode-map
@@ -36,7 +36,9 @@
 
 (defun evil-collection-ivy-setup ()
   "Set up `evil' bindings for `ivy-mode'."
-  (evil-define-key 'normal ivy-occur-mode-map
+  (evil-collection-define-key nil 'ivy-mode-map
+    (kbd "<escape>") 'minibuffer-keyboard-quit)
+  (evil-collection-define-key 'normal 'ivy-occur-mode-map
     [mouse-1] 'ivy-occur-click
     (kbd "<return>") 'ivy-occur-press-and-switch
     "j" 'ivy-occur-next-line
@@ -57,15 +59,15 @@
     "q" 'quit-window)
 
   (when evil-want-C-d-scroll
-    (evil-define-key 'normal ivy-occur-grep-mode-map
+    (evil-collection-define-key 'normal 'ivy-occur-grep-mode-map
       "D" 'ivy-occur-delete-candidate
       (kbd "C-d") 'evil-scroll-down))
 
-  (evil-define-key 'visual ivy-occur-grep-mode-map
+  (evil-collection-define-key 'visual 'ivy-occur-grep-mode-map
     "j" 'evil-next-line
     "k" 'evil-previous-line)
 
-  (evil-define-key 'normal ivy-occur-grep-mode-map
+  (evil-collection-define-key 'normal 'ivy-occur-grep-mode-map
     "d" 'ivy-occur-delete-candidate
     (kbd "C-x C-q") 'ivy-wgrep-change-to-wgrep-mode
     "i" 'ivy-wgrep-change-to-wgrep-mode
@@ -84,19 +86,21 @@
     "go" 'ivy-occur-dispatch
     "gc" 'ivy-occur-toggle-calling
 
+    "0" 'evil-digit-argument-or-evil-beginning-of-line
+
     ;; quit
     "q" 'quit-window)
 
   (defvar evil-collection-setup-minibuffer)
   (when evil-collection-setup-minibuffer
-    (evil-define-key 'normal ivy-minibuffer-map
+    (evil-collection-define-key 'normal 'ivy-minibuffer-map
       (kbd "<escape>") 'abort-recursive-edit
       (kbd "<return>") 'exit-minibuffer
       (kbd "C-m") 'ivy-done
       "j" 'ivy-next-line
       "k" 'ivy-previous-line)
 
-    (evil-define-key 'insert ivy-minibuffer-map
+    (evil-collection-define-key 'insert 'ivy-minibuffer-map
       [backspace] 'ivy-backward-delete-char
       (kbd "C-r") 'ivy-reverse-i-search
       (kbd "C-n") 'ivy-next-line

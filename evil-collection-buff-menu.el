@@ -27,12 +27,12 @@
 ;;; Bindings for `buff-menu'.
 
 ;;; Code:
+(require 'evil-collection)
+(require 'tabulated-list)
 
 ;; `evil-collection-buff-menu-Buffer-menu-unmark-all'
 
 ;; Code taken from emacs-26 repository.
-(require 'evil)
-(require 'tabulated-list)
 
 (defconst evil-collection-buff-menu-maps '(Buffer-menu-mode-map))
 
@@ -73,7 +73,7 @@ When called interactively prompt for MARK;  RET remove all marks."
   (evil-set-initial-state 'Buffer-menu-mode 'normal)
   (evil-add-hjkl-bindings Buffer-menu-mode-map 'normal)
 
-  (evil-define-key 'normal Buffer-menu-mode-map
+  (evil-collection-define-key 'normal 'Buffer-menu-mode-map
     "ZQ" 'evil-quit
     "ZZ" 'quit-window
     "gr" 'revert-buffer

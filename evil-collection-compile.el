@@ -27,9 +27,8 @@
 ;; Evil bindings for `compile'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'compile)
-(require 'evil-collection-evil-search)
 
 (defconst evil-collection-compile-maps '(compilation-mode-map))
 
@@ -37,7 +36,7 @@
   "Set up `evil' bindings for `compile'."
   (evil-set-initial-state 'compilation-mode 'normal)
 
-  (evil-define-key 'normal compilation-mode-map
+  (evil-collection-define-key 'normal 'compilation-mode-map
     "g?" 'describe-mode
     "?" evil-collection-evil-search-backward
     "gg" 'evil-goto-first-line

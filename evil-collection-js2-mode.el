@@ -27,7 +27,7 @@
 ;;; Bindings for `js2-mode'
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'js2-mode nil t)
 
 (defvar js-indent-level)

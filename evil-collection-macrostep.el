@@ -27,7 +27,7 @@
 ;; Evil bindings for `macrostep-mode'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'macrostep nil t)
 
 (defconst evil-collection-macrostep-maps '(macrostep-keymap))
@@ -38,7 +38,7 @@
   ;; Force `evil' to normalize keymaps.
   (add-hook 'macrostep-mode-hook #'evil-normalize-keymaps)
 
-  (evil-define-key 'normal macrostep-keymap
+  (evil-collection-define-key 'normal 'macrostep-keymap
     "q" 'macrostep-collapse-all
     "e" 'macrostep-expand
     "u" 'macrostep-collapse

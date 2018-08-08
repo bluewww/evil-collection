@@ -27,7 +27,7 @@
 ;;; Bindings for `ruby-mode'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'ruby-mode)
 
 (defconst evil-collection-ruby-mode-maps nil)

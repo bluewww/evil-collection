@@ -27,14 +27,14 @@
 ;; Bindings for `quickrun'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'quickrun nil t)
 
 (defconst evil-collection-quickrun-maps '(quickrun--mode-map))
 
 (defun evil-collection-quickrun-setup ()
   "Set up `evil' bindings for `quickrun'.."
-  (evil-define-key 'normal quickrun--mode-map
+  (evil-collection-define-key 'normal 'quickrun--mode-map
     "q" 'quit-window))
 
 (provide 'evil-collection-quickrun)

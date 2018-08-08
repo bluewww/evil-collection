@@ -28,37 +28,37 @@
 
 ;;; Code:
 (require 'daemons nil t)
-(require 'evil)
+(require 'evil-collection)
 
 (defconst evil-collection-daemons-maps '(daemons-mode-map
                                          daemons-output-mode-map))
 
 (defun evil-collection-daemons-setup ()
   "Set up `evil' bindings for `daemons'."
-  (evil-define-key '(normal visual) daemons-mode-map
-    (kbd "RET") #'daemons-status-at-point
-    "s" #'daemons-start-at-point
-    "S" #'daemons-stop-at-point
-    "r" #'daemons-reload-at-point
-    "R" #'daemons-restart-at-point
+  (evil-collection-define-key '(normal visual) 'daemons-mode-map
+    (kbd "RET") 'daemons-status-at-point
+    "s" 'daemons-start-at-point
+    "S" 'daemons-stop-at-point
+    "r" 'daemons-reload-at-point
+    "R" 'daemons-restart-at-point
 
-    "gr" #'revert-buffer
+    "gr" 'revert-buffer
 
-    "q" #'quit-window
-    "ZZ" #'quit-window
-    "ZQ" #'quit-window)
+    "q" 'quit-window
+    "ZZ" 'quit-window
+    "ZQ" 'quit-window)
 
   ;; Functions are available in daemons-output-mode-map as well
-  (evil-define-key '(normal visual) daemons-output-mode-map
-    (kbd "RET") #'daemons-status-at-point
-    "s" #'daemons-start-at-point
-    "S" #'daemons-stop-at-point
-    "r" #'daemons-reload-at-point
-    "R" #'daemons-restart-at-point
+  (evil-collection-define-key '(normal visual) 'daemons-output-mode-map
+    (kbd "RET") 'daemons-status-at-point
+    "s" 'daemons-start-at-point
+    "S" 'daemons-stop-at-point
+    "r" 'daemons-reload-at-point
+    "R" 'daemons-restart-at-point
 
-    "q" #'quit-window
-    "ZZ" #'quit-window
-    "ZQ" #'quit-window)
+    "q" 'quit-window
+    "ZZ" 'quit-window
+    "ZQ" 'quit-window)
 
   (evil-set-initial-state 'daemons-mode 'normal)
   (evil-set-initial-state 'daemons-output-mode 'normal))

@@ -27,11 +27,10 @@
 ;;; Bindings for `lua-mode'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'lua-mode nil t)
 
 (defvar lua-indent-level)
-
 (defconst evil-collection-lua-mode-maps '(lua-mode-map))
 
 (defun evil-collection-lua-mode-set-evil-shift-width ()
@@ -42,8 +41,9 @@
   "Set up `evil' bindings for `lua-mode'."
   (add-hook 'lua-mode-hook #'evil-collection-lua-mode-set-evil-shift-width)
 
-  (evil-define-key 'normal lua-mode-map
-    "K" 'lua-search-documentation))
+  (evil-collection-define-key 'normal 'lua-mode-map
+    "K" 'lua-search-documentation
+    "gz" 'run-lua))
 
 (provide 'evil-collection-lua-mode)
 ;;; evil-collection-lua-mode.el ends here

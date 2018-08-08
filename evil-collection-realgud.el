@@ -27,7 +27,7 @@
 ;; Bindings for `realgud'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'realgud nil t)
 
 (defconst evil-collection-realgud-maps '(realgud:shortkey-mode-map))
@@ -35,9 +35,9 @@
 (defun evil-collection-realgud-setup ()
   "Set up `evil' bindings for `realgud'."
   ;; This one is to represent `realgud-populate-src-buffer-map-plain'.
-  (evil-define-key 'normal realgud:shortkey-mode-map
+  (evil-collection-define-key 'normal 'realgud:shortkey-mode-map
     "b" 'realgud:cmd-break
-    "u" 'realgud:cmd-delete
+    "D" 'realgud:cmd-delete
     "X" 'realgud:cmd-clear
     "-" 'realgud:cmd-disable
     "+" 'realgud:cmd-enable
@@ -52,18 +52,18 @@
     "i" 'realgud:cmd-step
     "!" 'realgud:cmd-shell
 
-    ;; (define-key map [M-down]    'realgud-track-hist-newer)
-    ;; (define-key map [M-kp-2]    'realgud-track-hist-newer)
-    ;; (define-key map [M-up]      'realgud-track-hist-older)
-    ;; (define-key map [M-kp-8]    'realgud-track-hist-older)
-    ;; (define-key map [M-kp-up]   'realgud-track-hist-older)
-    ;; (define-key map [M-kp-down] 'realgud-track-hist-newer)
-    ;; (define-key map [M-print]   'realgud-track-hist-older)
-    ;; (define-key map [M-S-down]  'realgud-track-hist-newest)
-    ;; (define-key map [M-S-up]    'realgud-track-hist-oldest)
+    ;; (evil-collection-define-key nil map [M-down]    'realgud-track-hist-newer)
+    ;; (evil-collection-define-key nil map [M-kp-2]    'realgud-track-hist-newer)
+    ;; (evil-collection-define-key nil map [M-up]      'realgud-track-hist-older)
+    ;; (evil-collection-define-key nil map [M-kp-8]    'realgud-track-hist-older)
+    ;; (evil-collection-define-key nil map [M-kp-up]   'realgud-track-hist-older)
+    ;; (evil-collection-define-key nil map [M-kp-down] 'realgud-track-hist-newer)
+    ;; (evil-collection-define-key nil map [M-print]   'realgud-track-hist-older)
+    ;; (evil-collection-define-key nil map [M-S-down]  'realgud-track-hist-newest)
+    ;; (evil-collection-define-key nil map [M-S-up]    'realgud-track-hist-oldest)
     )
 
-  (evil-define-key 'normal realgud:shortkey-mode-map
+  (evil-collection-define-key 'normal 'realgud:shortkey-mode-map
     (kbd "C-x C-q") 'realgud-short-key-mode
     "1" 'realgud-goto-arrow1
     "2" 'realgud-goto-arrow2
@@ -86,6 +86,8 @@
     [left-margin mouse-1] 'realgud-cmds--mouse-add-remove-bp
     ">" 'realgud:cmd-newer-frame
     "<" 'realgud:cmd-older-frame
+    "d" 'realgud:cmd-newer-frame
+    "u" 'realgud:cmd-older-frame
     "gR" 'realgud-recenter-arrow ;; FIXME: Hmnn!
     "C" 'realgud-window-cmd-undisturb-src
     "g?" 'realgud:cmdbuf-info-describe

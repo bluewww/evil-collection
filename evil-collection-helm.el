@@ -27,7 +27,7 @@
 ;; Evil bindings for Helm.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'helm-files nil t) ; TODO: Check if this is the ideal requirement and if we are not loading too much.
 
 ;; To navigate Helm entries with <hjkl> in insert state, we need a modifier.
@@ -40,6 +40,10 @@
 
 (defvar helm-map)
 (defvar helm-find-files-map)
+(defvar helm-generic-files-map)
+(defvar helm-buffer-map)
+(defvar helm-moccur-map)
+(defvar helm-grep-map)
 (defvar helm-read-file-map)
 (defvar helm-echo-input-in-header-line)
 (defvar helm--prompt)
@@ -65,7 +69,7 @@
 (with-no-warnings
   (defun evil-collection-helm-hide-minibuffer-maybe ()
     "Hide text in minibuffer when `helm-echo-input-in-header-line' is non-nil."
-    (when (with-helm-buffer helm-echo-input-in-header-line)
+    (when (with-current-buffer (helm-buffer-get) helm-echo-input-in-header-line)
       (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
         (overlay-put ov 'window (selected-window))
         (overlay-put ov 'face (let ((bg-color (face-background 'default nil)))
@@ -104,7 +108,7 @@
   (add-hook 'helm-minibuffer-set-up-hook 'evil-collection-helm-hide-minibuffer-maybe)
   (setq helm-default-prompt-display-function 'evil-collection-helm--set-prompt-display)
 
-  (evil-define-key '(insert normal) helm-map
+  (evil-collection-define-key '(insert normal) 'helm-map
     (kbd "M-[") 'helm-previous-source
     (kbd "M-]") 'helm-next-source
     (kbd "M-l") 'helm-execute-persistent-action
@@ -113,39 +117,74 @@
     (kbd "C-f") 'helm-next-page
     (kbd "C-b") 'helm-previous-page)
 
-  (dolist (map (list helm-find-files-map helm-read-file-map))
-    (evil-define-key* 'normal map
-                      "go" 'helm-ff-run-switch-other-window
-                      "/" 'helm-ff-run-find-sh-command)
-    (evil-define-key* '(insert normal) map
-                      (kbd "S-<return>") 'helm-ff-run-switch-other-window
-                      (kbd "M-h") 'helm-find-files-up-one-level))
+  (dolist (map '(helm-find-files-map helm-read-file-map))
+    (evil-collection-define-key 'normal map
+      "go" 'helm-ff-run-switch-other-window
+      "/" 'helm-ff-run-find-sh-command)
+    (evil-collection-define-key '(insert normal) map
+      (kbd "S-<return>") 'helm-ff-run-switch-other-window
+      (kbd "M-h") 'helm-find-files-up-one-level))
 
   ;; TODO: Change the Helm header to display "M-l" instead of "C-l".  We don't
   ;; want to modify the Emacs Helm map.
 
-  (evil-define-key '(insert normal) helm-generic-files-map (kbd "S-<return>") 'helm-ff-run-switch-other-window)
-  (evil-define-key '(insert normal) helm-buffer-map (kbd "S-<return>") 'helm-buffer-switch-other-window)
-  (evil-define-key '(insert normal) helm-buffer-map (kbd "M-<return>") 'display-buffer)
-  (evil-define-key '(insert normal) helm-moccur-map (kbd "S-<return>") 'helm-moccur-run-goto-line-ow)
-  (evil-define-key '(insert normal) helm-grep-map (kbd "S-<return>") 'helm-grep-run-other-window-action)
-  (evil-define-key 'normal helm-generic-files-map "go" 'helm-ff-run-switch-other-window)
-  (evil-define-key 'normal helm-buffer-map "go" 'helm-buffer-switch-other-window)
-  (evil-define-key 'normal helm-buffer-map "gO" 'display-buffer)
-  (evil-define-key 'normal helm-moccur-map "go" 'helm-moccur-run-goto-line-ow)
-  (evil-define-key 'normal helm-grep-map "go" 'helm-grep-run-other-window-action)
+  (evil-collection-define-key '(insert normal) 'helm-generic-files-map
+    (kbd "S-<return>") 'helm-ff-run-switch-other-window)
 
-  (evil-define-key 'normal helm-buffer-map
+  (evil-collection-define-key '(insert normal) 'helm-buffer-map
+    (kbd "S-<return>") 'helm-buffer-switch-other-window
+    (kbd "M-<return>") 'display-buffer)
+
+  (evil-collection-define-key '(insert normal) 'helm-moccur-map
+    (kbd "S-<return>") 'helm-moccur-run-goto-line-ow)
+
+  (evil-collection-define-key '(insert normal) 'helm-grep-map
+    (kbd "S-<return>") 'helm-grep-run-other-window-action)
+
+  (evil-collection-define-key 'normal 'helm-generic-files-map
+    "go" 'helm-ff-run-switch-other-window)
+
+  (evil-collection-define-key 'normal 'helm-buffer-map
+    "go" 'helm-buffer-switch-other-window
+    "gO" 'display-buffer
     "=" 'helm-buffer-run-ediff
     "%" 'helm-buffer-run-query-replace-regexp
-    "D" 'helm-buffer-run-kill-persistent) ; Ivy has "D".
+    "D" 'helm-buffer-run-kill-persistent ; Ivy has "D".
+    )
 
-  (evil-define-key 'normal helm-find-files-map
+  (evil-collection-define-key 'normal 'helm-moccur-map
+    "go" 'helm-moccur-run-goto-line-ow)
+
+  (evil-collection-define-key 'normal 'helm-grep-map
+    "go" 'helm-grep-run-other-window-action)
+
+  (evil-collection-define-key 'normal 'helm-find-files-map
     "=" 'helm-ff-run-ediff-file
     "%" 'helm-ff-run-query-replace-regexp
     "D" 'helm-ff-run-delete-file)       ; Ivy has "D".
 
-  (evil-define-key 'normal helm-map
+  ;; These helm bindings should always exist, the evil equivalents do
+  ;; nothing useful in the minibuffer (error or pure failure).
+  ;; RET can't do a second line in the minibuffer.
+  ;; The C-n/C-p completions error with 'helm in helm' session.
+  ;; C-o switches to evil state (again, not useful).
+  (evil-collection-define-key '(insert normal) 'helm-map
+    (kbd "RET") 'helm-maybe-exit-minibuffer
+    (kbd "M-v") 'helm-previous-page
+    (kbd "C-v") 'helm-next-page
+    (kbd "C-p") 'helm-previous-line
+    (kbd "C-n") 'helm-next-line
+    (kbd "C-o") 'helm-next-source)
+
+  (when evil-want-C-u-scroll
+    (evil-collection-define-key 'normal 'helm-map
+      (kbd "C-u") 'helm-previous-page))
+
+  (when evil-want-C-d-scroll
+    (evil-collection-define-key 'normal 'helm-map
+      (kbd "C-d") 'helm-next-page))
+
+  (evil-collection-define-key 'normal 'helm-map
     (kbd "<tab>") 'helm-select-action   ; TODO: Ivy has "ga".
     (kbd "[") 'helm-previous-source
     (kbd "]") 'helm-next-source

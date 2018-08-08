@@ -28,14 +28,14 @@
 ;; `evil-mode'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'elisp-refs nil t)
 
 (defconst evil-collection-elisp-refs-maps '(elisp-refs-mode-map))
 
 (defun evil-collection-elisp-refs-setup ()
   "Set up `evil' bindings for `elisp-refs'."
-  (evil-define-key 'normal elisp-refs-mode-map
+  (evil-collection-define-key 'normal 'elisp-refs-mode-map
     (kbd "<tab>") 'elisp-refs-next-match
     (kbd "<backtab>") 'elisp-refs-prev-match
     (kbd "C-j") 'elisp-refs-next-match

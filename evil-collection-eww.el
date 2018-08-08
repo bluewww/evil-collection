@@ -28,7 +28,7 @@
 
 ;;; Code:
 (require 'eww)
-(require 'evil-collection-util)
+(require 'evil-collection)
 
 (defvar evil-collection-eww-maps '(eww-mode-map
                                    eww-history-mode-map
@@ -38,7 +38,7 @@
 (defun evil-collection-eww-setup ()
   "Set up `evil' bindings for `eww'."
 
-  (evil-define-key 'normal eww-mode-map
+  (evil-collection-define-key 'normal 'eww-mode-map
     "^" 'eww-up-url
     "u" 'eww-up-url
     "U" 'eww-top-url
@@ -49,12 +49,12 @@
     "gf" 'eww-view-source               ; Like qutebrowser.
 
     "&" 'eww-browse-with-external-browser
-    "C" 'url-cookie-list
-    "D" 'eww-toggle-paragraph-direction
-    "X" 'eww-set-character-encoding
-    "x" 'eww-toggle-fonts
+    "gc" 'url-cookie-list
+    "zd" 'eww-toggle-paragraph-direction
+    "ze" 'eww-set-character-encoding
+    "zf" 'eww-toggle-fonts
     "d" 'eww-download
-    "b" 'eww-add-bookmark
+    "m" 'eww-add-bookmark
     "R" 'eww-readable                   ; Default binding.
     "r" 'eww-readable
 
@@ -87,7 +87,7 @@
     "ZQ" 'quit-window
     "ZZ" 'quit-window)
 
-  (evil-define-key 'operator eww-mode-map
+  (evil-collection-define-key 'operator 'eww-mode-map
     "u" '(menu-item
           ""
           nil
@@ -97,9 +97,9 @@
                       (setq evil-inhibit-operator t)
                       #'eww-copy-page-url))))
 
-  (evil-collection-util-inhibit-insert-state eww-history-mode-map)
+  (evil-collection-inhibit-insert-state 'eww-history-mode-map)
   (evil-set-initial-state 'eww-history-mode 'normal)
-  (evil-define-key 'normal eww-history-mode-map
+  (evil-collection-define-key 'normal 'eww-history-mode-map
     (kbd "<return>") 'eww-history-browse
     ;; refresh
     "gr" 'revert-buffer
@@ -108,9 +108,9 @@
     "ZQ" 'quit-window
     "ZZ" 'quit-window)
 
-  (evil-collection-util-inhibit-insert-state eww-buffers-mode-map)
+  (evil-collection-inhibit-insert-state 'eww-buffers-mode-map)
   (evil-set-initial-state 'eww-buffers-mode 'normal)
-  (evil-define-key 'normal eww-buffers-mode-map
+  (evil-collection-define-key 'normal 'eww-buffers-mode-map
     "D" 'eww-buffer-kill
     (kbd "<return>") 'eww-buffer-select
     "]" 'eww-buffer-show-next
@@ -124,10 +124,12 @@
     "ZQ" 'quit-window
     "ZZ" 'quit-window)
 
-  (evil-collection-util-inhibit-insert-state eww-bookmark-mode-map)
+  (evil-collection-inhibit-insert-state 'eww-bookmark-mode-map)
   (evil-set-initial-state 'eww-bookmark-mode 'normal)
-  (evil-define-key 'normal eww-bookmark-mode-map
+  (evil-collection-define-key 'normal 'eww-bookmark-mode-map
     "D" 'eww-bookmark-kill
+    "P" 'eww-bookmark-yank
+
     (kbd "<return>") 'eww-bookmark-browse
     ;; refresh
     "gr" 'revert-buffer
@@ -136,7 +138,7 @@
     "ZQ" 'quit-window
     "ZZ" 'quit-window)
 
-  (evil-define-key 'operator eww-bookmark-mode-map
+  (evil-collection-define-key 'operator 'eww-bookmark-mode-map
     "u" '(menu-item
           ""
           nil

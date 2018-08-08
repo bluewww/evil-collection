@@ -27,7 +27,7 @@
 ;;; Bindings for `typescript-mode'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'typescript-mode nil t)
 
 (defvar typescript-indent-level)

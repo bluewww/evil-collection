@@ -28,30 +28,31 @@
 
 ;;; Code:
 (require 'vdiff nil t)
-(require 'evil)
+(require 'evil-collection)
 
 (defun evil-collection-vdiff-setup ()
   "Set up `evil' bindings for `vdiff-mode'."
-  (evil-define-minor-mode-key 'normal 'vdiff-mode
-    "]c" 'vdiff-next-hunk
-    "[c" 'vdiff-previous-hunk)
+  (dolist (mode '(vdiff-mode vdiff-3way-mode))
+    (evil-define-minor-mode-key 'normal mode
+      "]c" 'vdiff-next-hunk
+      "[c" 'vdiff-previous-hunk)
 
-  ;; define `do' (diff obtain) and `dp' (diff put) bindings
-  (evil-define-minor-mode-key 'operator 'vdiff-mode
-    "o" '(menu-item
-          ""
-          nil
-          :filter (lambda (&optional _)
-                    (when (memq evil-this-operator
-                                evil-collection-delete-operators)
-                      #'vdiff-receive-changes)))
-    "p" '(menu-item
-          ""
-          nil
-          :filter (lambda (&optional _)
-                    (when (memq evil-this-operator
-                                evil-collection-delete-operators)
-                      #'vdiff-send-changes)))))
+    ;; define `do' (diff obtain) and `dp' (diff put) bindings
+    (evil-define-minor-mode-key 'operator mode
+      "o" '(menu-item
+            ""
+            nil
+            :filter (lambda (&optional _)
+                      (when (memq evil-this-operator
+                                  evil-collection-delete-operators)
+                        #'vdiff-receive-changes)))
+      "p" '(menu-item
+            ""
+            nil
+            :filter (lambda (&optional _)
+                      (when (memq evil-this-operator
+                                  evil-collection-delete-operators)
+                        #'vdiff-send-changes))))))
 
 (provide 'evil-collection-vdiff)
 

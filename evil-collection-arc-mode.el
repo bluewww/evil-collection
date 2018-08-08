@@ -28,7 +28,7 @@
 
 ;;; Code:
 (require 'arc-mode)
-(require 'evil)
+(require 'evil-collection)
 
 (defconst evil-collection-arc-mode-maps '(archive-mode-map))
 
@@ -36,7 +36,7 @@
   "Set up `evil' bindings for `arc-mode'."
   (evil-set-initial-state 'arc-mode 'normal)
   (evil-set-initial-state 'archive-mode 'normal)
-  (evil-define-key 'normal archive-mode-map
+  (evil-collection-define-key 'normal 'archive-mode-map
     "j" 'archive-next-line
     "k" 'archive-previous-line
     (kbd "C-j") 'archive-next-line

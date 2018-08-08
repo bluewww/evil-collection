@@ -27,7 +27,7 @@
 ;; Evil bindings for `woman'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'evil-collection-man) ; WoMan's keymap inherits from Man.
 (require 'woman)
 
@@ -36,7 +36,7 @@
 (defun evil-collection-woman-setup ()
   "Set up `evil' bindings for `woman'."
   (evil-set-initial-state 'woman-mode 'normal)
-  (evil-define-key 'normal woman-mode-map
+  (evil-collection-define-key 'normal 'woman-mode-map
     (kbd "]") 'WoMan-next-manpage
     (kbd "[") 'WoMan-previous-manpage
 

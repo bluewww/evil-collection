@@ -27,7 +27,7 @@
 ;; Evil bindings for IBuffer.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'ibuffer)
 
 (defconst evil-collection-ibuffer-maps '(ibuffer-mode-map))
@@ -36,12 +36,12 @@
   "Set up `evil' bindings for `ibuffer'."
   (evil-set-initial-state 'ibuffer-mode 'normal)
 
-  (evil-define-key 'normal ibuffer-mode-map
+  (evil-collection-define-key 'normal 'ibuffer-mode-map
     (kbd "C-d") (if evil-want-C-d-scroll
                     'evil-scroll-down
                   'ibuffer-mark-for-delete-backwards))
 
-  (evil-define-key 'normal ibuffer-mode-map
+  (evil-collection-define-key 'normal 'ibuffer-mode-map
     (kbd "=") 'ibuffer-diff-with-file
     (kbd "J") 'ibuffer-jump-to-buffer
     (kbd "M-g") 'ibuffer-jump-to-buffer

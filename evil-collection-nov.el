@@ -27,7 +27,7 @@
 ;;; Bindings for`nov'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'nov nil t)
 
 (defvar nov-mode-map)
@@ -36,7 +36,7 @@
 
 (defun evil-collection-nov-setup ()
   "Set up `evil' bindings for `nov'."
-  (evil-define-key 'normal nov-mode-map
+  (evil-collection-define-key 'normal 'nov-mode-map
     "gr" 'nov-render-document
     "s" 'nov-view-source
     "S" 'nov-view-content-source

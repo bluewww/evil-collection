@@ -28,7 +28,7 @@
 
 ;;; Code:
 
-(require 'evil)
+(require 'evil-collection)
 (require 'epa nil t)
 
 (defconst evil-collection-epa-maps '(epa-key-list-mode-map
@@ -36,7 +36,7 @@
                                      epa-info-mode-map))
 
 (defun evil-collection-epa-setup ()
-  (evil-define-key 'normal epa-key-list-mode-map
+  (evil-collection-define-key 'normal 'epa-key-list-mode-map
     (kbd "<tab>") 'widget-forward
     "gr" 'revert-buffer
     "q" 'epa-exit-buffer
@@ -56,12 +56,12 @@
     "i" 'epa-import-keys
     "o" 'epa-export-keys)
 
-  (evil-define-key 'normal epa-key-mode-map
+  (evil-collection-define-key 'normal 'epa-key-mode-map
     "q" 'epa-exit-buffer
     "ZZ" 'quit-window
     "ZQ" 'evil-quit)
 
-  (evil-define-key 'normal epa-info-mode-map
+  (evil-collection-define-key 'normal 'epa-info-mode-map
     "q" 'delete-window
     "ZZ" 'quit-window
     "ZQ" 'evil-quit))

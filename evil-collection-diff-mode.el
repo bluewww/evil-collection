@@ -35,17 +35,17 @@
 
 ;;; Code:
 
-(require 'evil)
+(require 'evil-collection)
 (require 'diff-mode)
 
 (defconst evil-collection-diff-mode-maps '(diff-mode-map))
 
 (defun evil-collection-diff-read-only-state-switch ()
   "Make read-only in motion state, writable in normal state."
-  (if buffer-read-only
-      (progn
-        (evil-motion-state))
-    (evil-normal-state)))
+  (when (eq major-mode 'diff-mode)
+    (if buffer-read-only
+        (evil-motion-state)
+      (evil-normal-state))))
 
 (defun evil-collection-diff-toggle-setup ()
   "Toggle visiting diff buffers in motion state."
@@ -53,8 +53,7 @@
   (when (eq major-mode 'diff-mode)
     (if (memq 'evil-collection-diff-read-only-state-switch read-only-mode-hook)
         (remove-hook 'read-only-mode-hook 'evil-collection-diff-read-only-state-switch t)
-      (add-hook 'read-only-mode-hook 'evil-collection-diff-read-only-state-switch nil t)
-      (read-only-mode))))
+      (add-hook 'read-only-mode-hook 'evil-collection-diff-read-only-state-switch nil t))))
 
 ;;; TODO: Report toggle function upstream?
 (defun evil-collection-diff-toggle-context-unified (start end)
@@ -85,9 +84,11 @@ current file instead."
 (defun evil-collection-diff-mode-setup ()
   "Set up `evil' bindings for `diff-mode'."
 
-  (evil-set-initial-state 'diff-mode 'motion)
+  ;; Don't switch to read-only/motion state by default as this can interfere
+  ;; with other modes which require a writable buffer, e.g. magit.
+  (evil-set-initial-state 'diff-mode 'normal)
 
-  (evil-define-key 'normal diff-mode-map
+  (evil-collection-define-key 'normal 'diff-mode-map
     ;; motion
     (kbd "SPC") 'scroll-up-command
     (kbd "S-SPC") 'scroll-down-command
@@ -100,7 +101,7 @@ current file instead."
 
     "\\" 'read-only-mode) ; magit has "\"
 
-  (evil-define-key 'motion diff-mode-map
+  (evil-collection-define-key 'motion 'diff-mode-map
     ;; motion
     (kbd "SPC") 'scroll-up-command
     (kbd "S-SPC") 'scroll-down-command

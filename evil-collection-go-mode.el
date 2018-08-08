@@ -27,7 +27,7 @@
 ;; Bindings for `go-mode'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'go-mode nil t)
 
 (defconst evil-collection-go-mode-maps '(go-mode-map
@@ -35,10 +35,10 @@
 
 (defun evil-collection-go-mode-setup ()
   "Set up `evil' bindings for `go-mode'."
-  (evil-define-key 'normal go-mode-map
+  (evil-collection-define-key 'normal 'go-mode-map
     "gd" 'godef-jump
     "K" 'godef-describe)
-  (evil-define-key 'normal godoc-mode-map
+  (evil-collection-define-key 'normal 'godoc-mode-map
     "q" 'quit-window
     "g?" 'describe-mode))
 

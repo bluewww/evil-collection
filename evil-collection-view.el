@@ -27,7 +27,7 @@
 ;; Evil bindings for View.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'view)
 
 (defconst evil-collection-view-maps '(view-mode-map))
@@ -35,7 +35,7 @@
 (defun evil-collection-view-setup ()
   "Set up `evil' bindings for `view'."
   (evil-set-initial-state 'view-mode 'normal)
-  (evil-define-key 'normal view-mode-map
+  (evil-collection-define-key 'normal 'view-mode-map
     "q" 'quit-window
     (kbd "SPC") 'View-scroll-page-forward
     (kbd "S-SPC") 'View-scroll-page-backward

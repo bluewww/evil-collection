@@ -28,7 +28,7 @@
 
 ;;; Code:
 (require 'edebug)
-(require 'evil)
+(require 'evil-collection)
 
 (defconst evil-collection-edebug-maps
   '(edebug-mode-map
@@ -41,12 +41,13 @@
 
   (add-hook 'edebug-mode-hook #'evil-normalize-keymaps)
 
-  (define-key edebug-mode-map "g" nil)
-  (define-key edebug-mode-map "G" nil)
+  (evil-collection-define-key nil 'edebug-mode-map
+    "g" nil
+    "G" nil)
 
   ;; FIXME: Seems like other minor modes will readily clash with `edebug'.
   ;; `lispyville' and `edebug' 's' key?
-  (evil-define-key 'normal edebug-mode-map
+  (evil-collection-define-key 'normal 'edebug-mode-map
     ;; control
     "s" 'edebug-step-mode
     "n" 'edebug-next-mode
@@ -108,12 +109,12 @@
     (kbd "C-c C-l") 'edebug-where)
 
   (with-eval-after-load 'edebug-x
-    (evil-define-key 'normal edebug-x-instrumented-function-list-mode-map
+    (evil-collection-define-key 'normal 'edebug-x-instrumented-function-list-mode-map
       "E" 'edebug-x-evaluate-function
       "Q" 'edebug-x-clear-data
       (kbd "<return>") 'edebug-x-find-function
       "q" 'quit-window)
-    (evil-define-key 'normal edebug-x-breakpoint-list-mode-map
+    (evil-collection-define-key 'normal 'edebug-x-breakpoint-list-mode-map
       (kbd "<return>") 'edebug-x-visit-breakpoint
       "x" 'edebug-x-kill-breakpoint
       "Q" 'edebug-x-clear-data

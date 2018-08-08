@@ -27,7 +27,7 @@
 ;; Bindings for `wgrep'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'wgrep nil t)
 
 (defvar wgrep-mode-map)
@@ -36,10 +36,10 @@
 
 (defun evil-collection-wgrep-setup ()
   "Set up `evil' bindings for `wgrep'."
-  (evil-define-key nil wgrep-mode-map
+  (evil-collection-define-key nil 'wgrep-mode-map
     [remap evil-write] 'wgrep-finish-edit)
 
-  (evil-define-key 'normal wgrep-mode-map
+  (evil-collection-define-key 'normal 'wgrep-mode-map
     "ZQ" 'wgrep-abort-changes
     "ZZ" 'wgrep-finish-edit
     (kbd "<escape>") 'wgrep-exit))

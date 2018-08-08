@@ -28,17 +28,16 @@
 ;; This package uses normal state and redefines everything.
 
 ;;; Code:
-(require 'evil-collection-util)
-(require 'evil-collection-evil-search)
+(require 'evil-collection)
 (require 'info)
 
 (defconst evil-collection-info-maps '(Info-mode-map))
 
 (defun evil-collection-info-setup ()
   "Set up `evil' bindings for `info-mode'."
-  (evil-collection-util-inhibit-insert-state Info-mode-map)
+  (evil-collection-inhibit-insert-state 'Info-mode-map)
   (evil-set-initial-state 'Info-mode 'normal)
-  (evil-define-key 'normal Info-mode-map
+  (evil-collection-define-key 'normal 'Info-mode-map
     (kbd "<tab>") 'Info-next-reference
     (kbd "S-<tab>") 'Info-prev-reference
 
@@ -72,8 +71,12 @@
 
     ;; TODO: Should search with "n"/"N" cover the full manual like "C-s"/"C-r" does?
     ;; TODO: Directions?
-    "n" 'isearch-repeat-forward
-    "N" 'isearch-repeat-backward
+    "n" (if (evil-collection-evil-search-enabled)
+            evil-collection-evil-search-next
+          'isearch-repeat-forward)
+    "N" (if (evil-collection-evil-search-enabled)
+            evil-collection-evil-search-previous
+          'isearch-repeat-backward)
 
     ;; goto
     "gd" 'Info-goto-node ; TODO: "gd" does not match the rationale of "go to definition". Change?
@@ -94,7 +97,7 @@
     "ZQ" 'evil-quit
     "ZZ" 'Info-exit)
 
-  (evil-define-key 'operator Info-mode-map
+  (evil-collection-define-key 'operator 'Info-mode-map
     "u" '(menu-item                     ; Like eww.
           ""
           nil

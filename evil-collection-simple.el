@@ -27,7 +27,7 @@
 ;; Bindings for `simple'
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'simple)
 
 (defvar special-mode-map)
@@ -36,7 +36,7 @@
 
 (defun evil-collection-simple-setup ()
   "Set up `evil' bindings for `simple'."
-  (evil-define-key '(normal visual) special-mode-map
+  (evil-collection-define-key '(normal visual) 'special-mode-map
     "q" 'quit-window
     " " 'scroll-up-command
     "g?" 'describe-mode

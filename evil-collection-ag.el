@@ -28,14 +28,13 @@
 
 ;;; Code:
 (require 'ag nil t)
-(require 'evil)
-(require 'evil-collection-evil-search)
+(require 'evil-collection)
 
 (defconst evil-collection-ag-maps '(ag-mode-map))
 
 (defun evil-collection-ag-setup ()
   "Set up `evil' bindings for `ag'."
-  (evil-define-key '(normal visual) ag-mode-map
+  (evil-collection-define-key '(normal visual) 'ag-mode-map
     "k" 'evil-previous-line
     "h" 'evil-backward-char
 

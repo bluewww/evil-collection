@@ -27,7 +27,7 @@
 ;; Evil integration for `package-menu-mode'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'package)
 
 (defconst evil-collection-package-menu-maps '(package-menu-mode-map))
@@ -36,7 +36,7 @@
   "Set up `evil' bindings for `package-menu'."
   (evil-set-initial-state 'package-menu-mode 'normal)
 
-  (evil-define-key 'normal package-menu-mode-map
+  (evil-collection-define-key 'normal 'package-menu-mode-map
     "i" 'package-menu-mark-install
     "U" 'package-menu-mark-upgrades
     "d" 'package-menu-mark-delete

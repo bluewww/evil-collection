@@ -27,7 +27,7 @@
 ;; Evil bindings for `slime-mode'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'slime nil t)
 
 (defvar slime-parent-map)
@@ -67,11 +67,11 @@
   (evil-set-initial-state 'slime-popup-buffer-mode 'normal)
   (evil-set-initial-state 'slime-xref-mode 'normal)
 
-  (evil-define-key 'normal slime-parent-map
+  (evil-collection-define-key 'normal 'slime-parent-map
     "gd" 'slime-edit-definition
     (kbd "C-t") 'slime-pop-find-definition-stack)
 
-  (evil-define-key 'normal sldb-mode-map
+  (evil-collection-define-key 'normal 'sldb-mode-map
     (kbd "RET") 'sldb-default-action
     (kbd "C-m") 'sldb-default-action
     [return] 'sldb-default-action
@@ -109,9 +109,19 @@
     "B" 'sldb-break-with-default-debugger
     "P" 'sldb-print-condition
     "C" 'sldb-inspect-condition
-    "g:" 'slime-interactive-eval)
+    "g:" 'slime-interactive-eval
+    "0" 'sldb-invoke-restart-0
+    "1" 'sldb-invoke-restart-1
+    "2" 'sldb-invoke-restart-2
+    "3" 'sldb-invoke-restart-3
+    "4" 'sldb-invoke-restart-4
+    "5" 'sldb-invoke-restart-5
+    "6" 'sldb-invoke-restart-6
+    "7" 'sldb-invoke-restart-7
+    "8" 'sldb-invoke-restart-8
+    "9" 'sldb-invoke-restart-9)
 
-  (evil-define-key 'normal slime-inspector-mode-map
+  (evil-collection-define-key 'normal 'slime-inspector-mode-map
     [return] 'slime-inspector-operate-on-point
     (kbd "C-m") 'slime-inspector-operate-on-point
     [mouse-1] 'slime-inspector-operate-on-click
@@ -137,13 +147,13 @@
     "gR" 'slime-inspector-fetch-all
     "q" 'slime-inspector-quit)
 
-  (evil-define-key 'normal slime-mode-map
+  (evil-collection-define-key 'normal 'slime-mode-map
     (kbd "K") 'slime-describe-symbol
     (kbd "C-t") 'slime-pop-find-definition-stack
     ;; goto
     "gd" 'slime-edit-definition)
 
-  (evil-define-key 'normal slime-popup-buffer-mode-map
+  (evil-collection-define-key 'normal 'slime-popup-buffer-mode-map
     ;; quit
     "q" 'quit-window
 
@@ -152,7 +162,7 @@
     ;; goto
     "gd" 'slime-edit-definition)
 
-  (evil-define-key 'normal slime-xref-mode-map
+  (evil-collection-define-key 'normal 'slime-xref-mode-map
     (kbd "RET") 'slime-goto-xref
     (kbd "S-<return>") 'slime-goto-xref
     "go" 'slime-show-xref

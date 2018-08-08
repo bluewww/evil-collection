@@ -1,4 +1,4 @@
-;;; evil-collection-neotree.el --- Evil bindings for neotree -*- lexical-binding: t -*-
+;;; evil-collection-neotree.el --- Evil bindings for neotree -*- lexical-binding: t; no-byte-compile: t; -*-
 
 ;; Copyright (C) 2017 Pierre Neidhardt
 
@@ -28,9 +28,10 @@
 
 ;;; Code:
 
-(require 'evil)
+(require 'evil-collection)
 (require 'neotree nil t)
 
+(declare-function neotree-make-executor "neotree.el")
 (defconst evil-collection-neotree-maps '(neotree-mode-map))
 
 (defun evil-collection-neotree-setup ()
@@ -38,7 +39,7 @@
 
   (evil-set-initial-state 'neotree-mode 'normal) ;; Neotree start in normal by default.
 
-  (evil-define-key 'normal neotree-mode-map
+  (evil-collection-define-key 'normal 'neotree-mode-map
 
     (kbd "<return>") (neotree-make-executor
                       :file-fn 'neo-open-file

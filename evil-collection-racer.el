@@ -27,7 +27,7 @@
 ;; Bindings for `racer'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'racer nil t)
 
 (defconst evil-collection-racer-maps '(racer-mode-map
@@ -35,12 +35,12 @@
 
 (defun evil-collection-racer-setup ()
   "Set up `evil' bindings for `racer'."
-  (evil-define-key 'normal racer-mode-map
+  (evil-collection-define-key 'normal 'racer-mode-map
     "gd" 'racer-find-definition
     (kbd "C-t") 'pop-tag-mark
     "K" 'racer-describe)
 
-  (evil-define-key 'normal racer-help-mode-map
+  (evil-collection-define-key 'normal 'racer-help-mode-map
     "q" 'quit-window))
 
 (provide 'evil-collection-racer)

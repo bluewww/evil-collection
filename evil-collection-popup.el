@@ -27,7 +27,7 @@
 ;; Bindings for `popup'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'popup nil t)
 
 (defconst evil-collection-popup-maps '(popup-menu-keymap))
@@ -35,8 +35,9 @@
 (defun evil-collection-popup-setup ()
   "Set up `evil' bindings for `popup'."
   (defvar popup-menu-keymap)
-  (define-key popup-menu-keymap (kbd "C-j") 'popup-next)
-  (define-key popup-menu-keymap (kbd "C-k") 'popup-previous))
+  (evil-collection-define-key nil 'popup-menu-keymap
+    (kbd "C-j") 'popup-next
+    (kbd "C-k") 'popup-previous))
 
 (provide 'evil-collection-popup)
 ;;; evil-collection-popup.el ends here

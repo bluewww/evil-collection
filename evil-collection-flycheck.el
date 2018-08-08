@@ -27,7 +27,7 @@
 ;; Evil bindings for `flycheck-mode'.
 
 ;;; Code:
-(require 'evil)
+(require 'evil-collection)
 (require 'flycheck nil t)
 
 (defvar flycheck-error-list-mode-map)
@@ -37,7 +37,7 @@
 (defun evil-collection-flycheck-setup ()
   "Set up `evil' bindings for `flycheck'."
   (evil-set-initial-state 'flycheck-error-list-mode 'normal)
-  (evil-define-key 'normal flycheck-error-list-mode-map
+  (evil-collection-define-key 'normal 'flycheck-error-list-mode-map
     "gj" 'flycheck-error-list-next-error
     "gk" 'flycheck-error-list-previous-error
     (kbd "C-j") 'flycheck-error-list-next-error
